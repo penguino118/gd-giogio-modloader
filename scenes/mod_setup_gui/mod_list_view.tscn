@@ -1,0 +1,208 @@
+[gd_scene load_steps=16 format=3 uid="uid://b8rfon207j3kn"]
+
+[ext_resource type="Script" uid="uid://bfluxtbp026ka" path="res://scenes/mod_setup_gui/mod_list_view.gd" id="1_hl8tv"]
+[ext_resource type="Theme" uid="uid://bxng31jcwi6bd" path="res://resources/main_theme.tres" id="1_vmh8p"]
+[ext_resource type="Texture2D" uid="uid://4etfa1578x6m" path="res://assets/mod_list_icons/refresh.png" id="3_0g8o7"]
+[ext_resource type="Texture2D" uid="uid://dpjoswfqccsbq" path="res://assets/mod_list_icons/up.png" id="4_18oy4"]
+[ext_resource type="Texture2D" uid="uid://cqixyaaaft2c8" path="res://assets/mod_list_icons/arrowUp.png" id="5_6mfse"]
+[ext_resource type="Texture2D" uid="uid://dfius41ftyfuk" path="res://assets/mod_list_icons/down.png" id="6_bvnnv"]
+[ext_resource type="Texture2D" uid="uid://c1bkhm60guifq" path="res://assets/mod_list_icons/plus.png" id="7_2k28e"]
+[ext_resource type="Texture2D" uid="uid://c6ocujdu1o130" path="res://assets/mod_list_icons/minus.png" id="7_18oy4"]
+[ext_resource type="Texture2D" uid="uid://kxvo1smrd8lu" path="res://assets/mod_list_icons/arrowDown.png" id="8_6mfse"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_hl8tv"]
+action = &"modlist_refresh"
+
+[sub_resource type="Shortcut" id="Shortcut_w6vyk"]
+events = [SubResource("InputEventAction_hl8tv")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_w6vyk"]
+action = &"modlist_up"
+
+[sub_resource type="Shortcut" id="Shortcut_wehdk"]
+events = [SubResource("InputEventAction_w6vyk")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_wehdk"]
+action = &"modlist_down"
+
+[sub_resource type="Shortcut" id="Shortcut_fdhu1"]
+events = [SubResource("InputEventAction_wehdk")]
+
+[node name="Mod List View" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hl8tv")
+
+[node name="HBoxContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 200
+dragging_enabled = false
+dragger_visibility = 1
+drag_area_highlight_in_editor = true
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Row Container" type="VBoxContainer" parent="HBoxContainer/Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Header" type="HBoxContainer" parent="HBoxContainer/Panel/Row Container"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_vmh8p")
+theme_override_constants/separation = 0
+
+[node name="Active Label" type="Label" parent="HBoxContainer/Panel/Row Container/Header"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"CellHeader"
+text = "Active"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tags Label" type="Label" parent="HBoxContainer/Panel/Row Container/Header"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"CellHeader"
+text = "Tags"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title Label" type="Label" parent="HBoxContainer/Panel/Row Container/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"CellHeader"
+text = "  Title"
+clip_text = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel/Row Container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Mod Entry Rows" type="VBoxContainer" parent="HBoxContainer/Panel/Row Container/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Button Container" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 12
+
+[node name="RefreshButton" type="Button" parent="HBoxContainer/Button Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"ModListButton"
+shortcut = SubResource("Shortcut_w6vyk")
+icon = ExtResource("3_0g8o7")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TopButton" type="Button" parent="HBoxContainer/Button Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Move currently selected mod to the top of the list."
+focus_mode = 0
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"ModListButton"
+disabled = true
+icon = ExtResource("4_18oy4")
+icon_alignment = 1
+expand_icon = true
+
+[node name="UpButton" type="Button" parent="HBoxContainer/Button Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Move currently selected mod up in the list."
+focus_mode = 0
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"ModListButton"
+disabled = true
+shortcut = SubResource("Shortcut_wehdk")
+icon = ExtResource("5_6mfse")
+icon_alignment = 1
+expand_icon = true
+
+[node name="AddButton" type="Button" parent="HBoxContainer/Button Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Add a new mod from a file."
+focus_mode = 0
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"ModListButton"
+icon = ExtResource("7_2k28e")
+icon_alignment = 1
+expand_icon = true
+
+[node name="RemoveButton" type="Button" parent="HBoxContainer/Button Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Remove the currently selected mod."
+focus_mode = 0
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"ModListButton"
+icon = ExtResource("7_18oy4")
+icon_alignment = 1
+expand_icon = true
+
+[node name="DownButton" type="Button" parent="HBoxContainer/Button Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Move currently selected mod down in the list."
+focus_mode = 0
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"ModListButton"
+disabled = true
+shortcut = SubResource("Shortcut_fdhu1")
+icon = ExtResource("8_6mfse")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BottomButton" type="Button" parent="HBoxContainer/Button Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Move currently selected mod to the bottom of the list."
+focus_mode = 0
+theme = ExtResource("1_vmh8p")
+theme_type_variation = &"ModListButton"
+disabled = true
+icon = ExtResource("6_bvnnv")
+icon_alignment = 1
+expand_icon = true

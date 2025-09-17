@@ -1,0 +1,175 @@
+[gd_scene load_steps=12 format=3 uid="uid://b0b753ekrvk8t"]
+
+[ext_resource type="Script" uid="uid://g44c6cnhybna" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://b8rfon207j3kn" path="res://scenes/mod_setup_gui/mod_list_view.tscn" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://jk164yrfsubo" path="res://scenes/mod_setup_gui/mod_description_view.tscn" id="3_lquwl"]
+[ext_resource type="Theme" uid="uid://bxng31jcwi6bd" path="res://resources/main_theme.tres" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://dg70lnriuhgmm" path="res://scenes/config_ui/configure_control.gd" id="5_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dhm2e7m2sirmc" path="res://scenes/config_ui/path_picker.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://dwxp6xppbxleu" path="res://scenes/config_ui/game_dir_status_view.gd" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://1qcd4cpce1o8" path="res://scenes/config_ui/file_picker.tscn" id="7_5vw27"]
+[ext_resource type="PackedScene" uid="uid://2p0858siofm4" path="res://scenes/applying_mods_overlay.tscn" id="9_kek77"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_5vw27"]
+device = -1
+ctrl_pressed = true
+keycode = 83
+unicode = 115
+
+[sub_resource type="Shortcut" id="Shortcut_kek77"]
+events = [SubResource("InputEventKey_5vw27")]
+
+[node name="Panel" type="Node"]
+script = ExtResource("1_h2yge")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_1bvp3")
+current_tab = 0
+use_hidden_tabs_for_min_size = true
+
+[node name="Mod Setup" type="VBoxContainer" parent="TabContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Mod Setup"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ModControlContainer" type="VSplitContainer" parent="TabContainer/Mod Setup/MarginContainer"]
+custom_minimum_size = Vector2(240, 240)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+split_offset = 100
+drag_area_highlight_in_editor = true
+
+[node name="Mod List View" parent="TabContainer/Mod Setup/MarginContainer/ModControlContainer" instance=ExtResource("2_1bvp3")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Mod Description Panel" type="Panel" parent="TabContainer/Mod Setup/MarginContainer/ModControlContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Mod Description View" parent="TabContainer/Mod Setup/MarginContainer/ModControlContainer/Mod Description Panel" instance=ExtResource("3_lquwl")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 175)
+layout_mode = 1
+
+[node name="FooterPanel" type="Panel" parent="TabContainer/Mod Setup"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("4_1bvp3")
+theme_type_variation = &"Footer"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Mod Setup/FooterPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="ApplyButton" type="Button" parent="TabContainer/Mod Setup/FooterPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Apply"
+
+[node name="ApplyRunButton" type="Button" parent="TabContainer/Mod Setup/FooterPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Apply and Run"
+
+[node name="Create" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Settings" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("5_5vw27")
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Settings"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Settings/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="GameDirPicker" parent="TabContainer/Settings/MarginContainer/VBoxContainer" instance=ExtResource("5_lquwl")]
+unique_name_in_owner = true
+layout_mode = 2
+target_name = "Game Directory"
+
+[node name="GameDirStatusView" type="RichTextLabel" parent="TabContainer/Settings/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=#f76b60][outline_size=4]Game executable not found.[/outline_size][/color]
+"
+scroll_active = false
+tab_size = 0
+script = ExtResource("6_272bh")
+
+[node name="PCSX2CheatsPicker" parent="TabContainer/Settings/MarginContainer/VBoxContainer" instance=ExtResource("5_lquwl")]
+unique_name_in_owner = true
+layout_mode = 2
+target_name = "PCSX2 Cheats"
+
+[node name="PCSX2ExecPicker" parent="TabContainer/Settings/MarginContainer/VBoxContainer" instance=ExtResource("7_5vw27")]
+unique_name_in_owner = true
+layout_mode = 2
+target_name = "PCSX2 Executable"
+
+[node name="FooterPanel" type="Panel" parent="TabContainer/Settings"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("4_1bvp3")
+theme_type_variation = &"Footer"
+
+[node name="ApplySettingsButton" type="Button" parent="TabContainer/Settings/FooterPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 439.0
+offset_top = 15.0
+offset_right = -21.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 4
+shortcut = SubResource("Shortcut_kek77")
+text = "Save Current Settings"
+
+[node name="ApplyingModsOverlay" parent="." instance=ExtResource("9_kek77")]

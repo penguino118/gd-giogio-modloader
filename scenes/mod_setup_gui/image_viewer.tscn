@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccjodbmxptjtf"]
+
+[ext_resource type="Texture2D" uid="uid://cu2mhurfymrck" path="res://assets/placeholder_image.png" id="1_8kv88"]
+[ext_resource type="Script" uid="uid://cmxhv8hs8pdja" path="res://scenes/mod_setup_gui/image_viewer.gd" id="1_daujo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_daujo"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.529412)
+shadow_offset = Vector2(2, 2)
+
+[node name="ImageViewer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+script = ExtResource("1_daujo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+color = Color(0, 0, 0, 0.501961)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 2
+texture_repeat = 1
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 226.0
+offset_top = 300.0
+offset_right = -226.0
+offset_bottom = -300.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 128)
+mouse_filter = 0
+texture = ExtResource("1_8kv88")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 253.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Click ESC to exit.
+Use the mouse wheel to zoom."
+label_settings = SubResource("LabelSettings_daujo")

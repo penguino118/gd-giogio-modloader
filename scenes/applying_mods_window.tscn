@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ckyhbpginiki4"]
+
+[node name="Window" type="Window"]
+title = "Applying Mods "
+initial_position = 1
+size = Vector2i(400, 100)
+transient = true
+exclusive = true
+popup_window = true

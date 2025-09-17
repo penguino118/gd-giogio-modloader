@@ -1,0 +1,146 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpi2h7oeo5g22"]
+
+[ext_resource type="Script" uid="uid://brnow66t40o6j" path="res://scenes/mod_setup_gui/mod_info_row.gd" id="1_nwatf"]
+[ext_resource type="Theme" uid="uid://bxng31jcwi6bd" path="res://resources/main_theme.tres" id="1_r2shr"]
+[ext_resource type="Texture2D" uid="uid://cvk510nd66hi0" path="res://assets/tag_icons/adx_16.png" id="2_nwatf"]
+[ext_resource type="Texture2D" uid="uid://psp5vo3bco6y" path="res://assets/tag_icons/textures_16.png" id="3_4p1kx"]
+[ext_resource type="Texture2D" uid="uid://24fc0j7k7vuc" path="res://assets/tag_icons/pcsx2_16.png" id="4_hppqy"]
+[ext_resource type="Texture2D" uid="uid://dij4seen30yvv" path="res://assets/tag_icons/ips_16.png" id="5_4i0x8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtnk5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7jq4u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6fr2i"]
+
+[node name="ModRow" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_nwatf")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("1_r2shr")
+theme_type_variation = &"Cell"
+
+[node name="Active Checkbox" type="CheckBox" parent="Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r2shr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jtnk5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7jq4u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fr2i")
+icon_alignment = 1
+
+[node name="FocusOverlay" type="Panel" parent="Panel/Active Checkbox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_r2shr")
+theme_type_variation = &"CellOverlay"
+
+[node name="Tags Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+focus_mode = 2
+mouse_filter = 1
+theme = ExtResource("1_r2shr")
+theme_type_variation = &"Cell"
+
+[node name="Tags" type="HBoxContainer" parent="Tags Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r2shr")
+theme_type_variation = &"Cell"
+theme_override_constants/separation = 0
+
+[node name="AFSRect" type="TextureRect" parent="Tags Panel/Tags"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "This mod modifies assets from AFS_DATA.AFS, AFS00.AFS, or AFS01.AFS."
+texture = ExtResource("2_nwatf")
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Tags Panel/Tags"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "This mod overrides textures globally via their loading ID."
+texture = ExtResource("3_4p1kx")
+stretch_mode = 5
+
+[node name="PnachRect" type="TextureRect" parent="Tags Panel/Tags"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "This mod includes PNACH codes that must be activated through PCSX2."
+texture = ExtResource("4_hppqy")
+stretch_mode = 5
+
+[node name="PatchRect" type="TextureRect" parent="Tags Panel/Tags"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "This mod patches files via IPS patches."
+texture = ExtResource("5_4i0x8")
+stretch_mode = 5
+
+[node name="FocusOverlay" type="Panel" parent="Tags Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_r2shr")
+theme_type_variation = &"CellOverlay"
+
+[node name="Title Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+focus_mode = 2
+mouse_filter = 1
+theme = ExtResource("1_r2shr")
+theme_type_variation = &"Cell"
+text = "Title"
+vertical_alignment = 1
+clip_text = true
+
+[node name="FocusOverlay" type="Panel" parent="Title Label"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_r2shr")
+theme_type_variation = &"CellOverlay"

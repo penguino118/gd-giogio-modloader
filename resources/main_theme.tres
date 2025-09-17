@@ -1,0 +1,78 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bxng31jcwi6bd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vnc4k"]
+bg_color = Color(0.129412, 0.619608, 1, 0.352941)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2nojw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ols5k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ols5k"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.230315, 0.230315, 0.230315, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.450648, 0.450648, 0.450648, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2nojw"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.423651, 0.423651, 0.423651, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biaja"]
+bg_color = Color(0.129412, 0.619608, 1, 0.352941)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjhx0"]
+bg_color = Color(0.325441, 0.325441, 0.325441, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.560201, 0.559608, 0.572234, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x127s"]
+bg_color = Color(0.0557173, 0.0620402, 0.0721006, 0.972549)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u427p"]
+bg_color = Color(0.226707, 0.226708, 0.226707, 1)
+
+[resource]
+Cell/base_type = &"Checkbox"
+Cell/styles/focus = SubResource("StyleBoxFlat_vnc4k")
+Cell/styles/hover = SubResource("StyleBoxEmpty_2nojw")
+Cell/styles/hover_pressed = SubResource("StyleBoxEmpty_ols5k")
+Cell/styles/normal = SubResource("StyleBoxFlat_ols5k")
+Cell/styles/panel = SubResource("StyleBoxFlat_ols5k")
+CellHeader/base_type = &"Label"
+CellHeader/font_sizes/font_size = 16
+CellHeader/styles/normal = SubResource("StyleBoxFlat_2nojw")
+CellOverlay/base_type = &"Panel"
+CellOverlay/styles/panel = SubResource("StyleBoxFlat_biaja")
+Footer/base_type = &"Panel"
+Footer/styles/panel = SubResource("StyleBoxFlat_qjhx0")
+ModListButton/base_type = &"Button"
+ModListButton/constants/icon_max_width = 20
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_x127s")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_u427p")
