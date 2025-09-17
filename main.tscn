@@ -173,3 +173,4 @@ shortcut = SubResource("Shortcut_kek77")
 text = "Save Current Settings"
 
 [node name="ApplyingModsOverlay" parent="." instance=ExtResource("9_kek77")]
+visible = false
