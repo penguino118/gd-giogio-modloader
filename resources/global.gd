@@ -19,7 +19,6 @@ var mod_list : Array[ModData] = []
 # config variables
 var config_path : String = "user://gd-giogio-modloader.cfg"
 var game_path : String = ""
-var pcsx2_exec_path : String = ""
 var pcsx2_cheats_path : String = ""
 var pcsx2_arguments : PackedStringArray = []
 var mod_list_order : Array = [] # order for the mods in the mod list
@@ -303,7 +302,6 @@ func save_config() -> void:
 	print("Saving current configuration...")
 	var config = ConfigFile.new()
 	
-	config.set_value("General", "pcsx2_exec_path", pcsx2_exec_path)
 	config.set_value("General", "pcsx2_cheats_path", pcsx2_cheats_path)
 	config.set_value("General", "pcsx2_arguments", pcsx2_arguments)
 	config.set_value("General", "game_path", game_path)
@@ -326,7 +324,6 @@ func load_config() -> void:
 		OS.alert("Couldn't load modloader settings! (%s)" % str(err), "Error")
 		return
 
-	pcsx2_exec_path = config.get_value("General", "pcsx2_exec_path", "")
 	pcsx2_cheats_path = config.get_value("General", "pcsx2_cheats_path", "")
 	pcsx2_arguments = config.get_value("General", "pcsx2_arguments", [])
 	game_path = config.get_value("General", "game_path", "")

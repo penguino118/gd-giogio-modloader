@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0b753ekrvk8t"]
+[gd_scene load_steps=11 format=3 uid="uid://b0b753ekrvk8t"]
 
 [ext_resource type="Script" uid="uid://g44c6cnhybna" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://b8rfon207j3kn" path="res://scenes/mod_setup_gui/mod_list_view.tscn" id="2_1bvp3"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://dg70lnriuhgmm" path="res://scenes/config_ui/configure_control.gd" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dhm2e7m2sirmc" path="res://scenes/config_ui/path_picker.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://dwxp6xppbxleu" path="res://scenes/config_ui/game_dir_status_view.gd" id="6_272bh"]
-[ext_resource type="PackedScene" uid="uid://1qcd4cpce1o8" path="res://scenes/config_ui/file_picker.tscn" id="7_5vw27"]
 [ext_resource type="PackedScene" uid="uid://2p0858siofm4" path="res://scenes/applying_mods_overlay.tscn" id="9_kek77"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_5vw27"]
@@ -95,11 +94,6 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "Apply"
 
-[node name="ApplyRunButton" type="Button" parent="TabContainer/Mod Setup/FooterPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-text = "Apply and Run"
-
 [node name="Create" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
@@ -144,11 +138,6 @@ script = ExtResource("6_272bh")
 unique_name_in_owner = true
 layout_mode = 2
 target_name = "PCSX2 Cheats"
-
-[node name="PCSX2ExecPicker" parent="TabContainer/Settings/MarginContainer/VBoxContainer" instance=ExtResource("7_5vw27")]
-unique_name_in_owner = true
-layout_mode = 2
-target_name = "PCSX2 Executable"
 
 [node name="FooterPanel" type="Panel" parent="TabContainer/Settings"]
 custom_minimum_size = Vector2(0, 60)

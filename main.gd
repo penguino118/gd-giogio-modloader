@@ -4,8 +4,6 @@ extends Node
 @onready var mod_description_view = %"Mod Description View"
 
 @onready var mod_apply_button: Button = $"TabContainer/Mod Setup/FooterPanel/HBoxContainer/ApplyButton"
-@onready var mod_apply_run_button: Button = $"TabContainer/Mod Setup/FooterPanel/HBoxContainer/ApplyRunButton"
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,7 +11,6 @@ func _ready() -> void:
 	mod_list_view.request_mod_list.connect(set_mod_list)
 	mod_list_view.visibility_changed.connect(set_mod_list)
 	mod_apply_button.pressed.connect(on_mod_apply_pressed)
-	mod_apply_run_button.pressed.connect(on_mod_apply_run_pressed)
 	set_mod_list()
 
 
@@ -36,18 +33,3 @@ func on_mod_apply_pressed() -> void:
 	Global.file_handler.apply_mods()
 	Global.save_config()
 	Global.mod_apply_end.emit()
-
-
-func on_mod_apply_run_pressed() -> void:
-	on_mod_apply_pressed()
-	var elf_path = Global.get_elf_path()
-	var pcsx2_path = Global.pcsx2_exec_path
-	var pcsx2_args = Global.pcsx2_arguments
-	if pcsx2_path == "" or !FileAccess.file_exists(pcsx2_path):
-		OS.alert("Couldn't find PCSX2. Check if the configured path is correct.")
-		return
-	if !FileAccess.file_exists(elf_path):
-		OS.alert(str("The game's executable (", Global.ELF_FILENAME ,") couldn't be found."))
-		return
-	pcsx2_args.append("-elf %s" % elf_path)
-	OS.execute(pcsx2_path, pcsx2_args)
