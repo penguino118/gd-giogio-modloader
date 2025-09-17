@@ -44,6 +44,22 @@ func restore_from_backup(entry: Dictionary) -> void:
 
 
 func check_and_restore_backups() -> void:
+	# restore modloader ELF changes
+	var game_directory = DirAccess.open(Global.game_path)
+	if not game_directory:
+		printerr("Couldn't access game directory for ELF backup. (%s)" % DirAccess.get_open_error())
+	else:
+		var original_elf = Global.game_path.path_join(Global.ELF_FILENAME)
+		var modded_elf  = Global.game_path.path_join(Global.MOD_ELF_FILENAME)
+		
+		if not FileAccess.file_exists(modded_elf):
+			Global.verify_modloader_elf_exists()
+		else:
+			var copy = game_directory.copy(original_elf, modded_elf)
+			if copy != OK:
+				printerr("Couldn't restore ELF changes. (%s)" % str(copy))
+	
+	# restore other assets
 	for entry in backup_entries:
 		var mod_origin = null
 		for mod in Global.mod_list:
@@ -57,7 +73,7 @@ func check_and_restore_backups() -> void:
 			restore_from_backup(entry)
 
 
-func backup_file(source_file: String, patch: PackedByteArray, mod_filename: String) -> bool:
+func backup_file(source_file: String, mod_filename: String) -> bool:
 	if source_file == "": 
 		printerr("Source path is empty, skipping patching.")
 		return false
@@ -216,21 +232,28 @@ func patch_all_files(patch_files: Array[Dictionary]) -> void:
 		var source_file_path = Global.game_path.path_join(patch_target)
 		var backup_exists := false
 		
+		if patch_target == Global.ELF_FILENAME:
+			# we're gonna patch the modded elf for the game list instead of the main executable
+			source_file_path = Global.game_path.path_join(Global.MOD_ELF_FILENAME)
+			backup_exists = true # since the original elf is kept
+			
 		if not FileAccess.file_exists(source_file_path):
 			printerr("File to be patched doesn't exist: %s" % source_file_path)
 			continue
 			
-		# warn user if it's patching over an already patched file
-		for backup_entry in backup_entries:
-			if backup_entry["file_path"] == source_file_path:
-				print("One or more mods are patching the same file (%s)." % source_file_path.get_file())
-				backup_exists = true
-				break
+		# for things that aren't the executable, warn user if it's patching over an already patched file
+		if not backup_exists:
+			for backup_entry in backup_entries:
+				if backup_entry["file_path"] == source_file_path:
+					print("One or more mods are patching the same file (%s)." % source_file_path.get_file())
+					backup_exists = true
+					break
 		
 		if not backup_exists:
-			var backup_success = backup_file(source_file_path, patch_data, mod_filename)
+			var backup_success = backup_file(source_file_path, mod_filename)
 			if not backup_success:
 				continue
+		
 		patch_file(source_file_path, patch_data, mod_filename)
 
 
@@ -262,7 +285,7 @@ func apply_mods() -> void:
 		add_or_overwrite_entries(tm2_files, mod_tm2_files)
 	
 	Global.insert_hook_pnach(pnach_files)
-	Global.verify_hook_binary()
+	Global.verify_hook_binary_exists()
 	
 	patch_all_files(patch_files)
 	create_pnach(pnach_files)

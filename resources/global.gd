@@ -11,6 +11,7 @@ const TM2_FOLDER_NAME = "tm2"
 const HOOK_PNACH_PATH = "res://resources/hook_mod/SLPM-65140_8F82785A.modloader.pnach"
 const HOOK_BINARY_PATH = "res://resources/hook_mod/modloader.bin"
 
+const MOD_ELF_FILENAME = "gg-modloader.elf"
 const ELF_FILENAME = "SLPM_651.40"
 const RETAIL_CRC = 0x8F82785A
 
@@ -81,7 +82,10 @@ func check_and_add_pnach_header(pnach: String, mod_title: String, index: int) ->
 
 
 func get_pnach_filename() -> String:
-	return "SLPM-65140_%8X.modloader.pnach" % get_file_crc(get_elf_path())
+	var elf_basename = ELF_FILENAME
+	elf_basename = elf_basename.replace('.', '')
+	elf_basename = elf_basename.replace('-', '_')
+	return "%s_%8X.modloader.pnach" % [elf_basename, RETAIL_CRC]
 
 
 func insert_hook_pnach(pnach_lines: PackedStringArray) -> void:
@@ -92,7 +96,7 @@ func insert_hook_pnach(pnach_lines: PackedStringArray) -> void:
 	pnach_lines.insert(0, hook_lines)
 
 
-func verify_hook_binary() -> void:
+func verify_hook_binary_exists() -> void:
 	if game_path == "":
 		OS.alert("Can't get or create modloader hook binary (Game path is null)", "Error")
 		return
@@ -252,6 +256,32 @@ func get_afs_folder() -> String:
 func get_elf_path() -> String:
 	if game_path == "": return ""
 	return game_path.path_join(ELF_FILENAME)
+
+
+func get_modded_elf_path() -> String:
+	if game_path == "": return ""
+	return game_path.path_join(MOD_ELF_FILENAME)
+
+func verify_modloader_elf_exists() -> void:
+	if game_path == "":
+		OS.alert("Can't get or create modloader ELF (Game path is null)", "Error")
+		return
+	
+	var original_elf_path = Global.game_path.path_join(Global.ELF_FILENAME)
+	var mod_elf_path = game_path.path_join(MOD_ELF_FILENAME)
+	if FileAccess.file_exists(mod_elf_path):
+		return
+	
+	var game_directory = DirAccess.open(game_path)
+	if not game_directory:
+		printerr("Couldn't access game directory for ELF creation. (%s)" % DirAccess.get_open_error())
+		return
+	
+	var copy = game_directory.copy(original_elf_path, mod_elf_path)
+	if copy != OK:
+		printerr("Couldn't create modloader ELF. (%s)" % str(copy))
+	
+	print("Modloader ELF created. (%s)" % MOD_ELF_FILENAME)
 
 
 func get_file_crc(path : String) -> int:
