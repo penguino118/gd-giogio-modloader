@@ -6,12 +6,12 @@ signal mod_apply_end
 const MOD_FOLDER_NAME = "mods"
 const BACKUPS_FOLDER_NAME = "backups"
 const AFS_FOLDER_NAME = "afs"
-const TM2_FOLDER_NAME = "global_textures"
-const MODLOADER_ELF_NAME = "gg-modloader.elf"
+const TM2_FOLDER_NAME = "tm2"
 
 const HOOK_PNACH_PATH = "res://resources/hook_mod/SLPM-65140_8F82785A.modloader.pnach"
-const HOOK_BINARY = "res://resources/hook_mod/modloader.bin"
+const HOOK_BINARY_PATH = "res://resources/hook_mod/modloader.bin"
 
+const ELF_FILENAME = "SLPM_651.40"
 const RETAIL_CRC = 0x8F82785A
 
 var file_handler = FileHandler.new()
@@ -98,7 +98,7 @@ func verify_hook_binary() -> void:
 		OS.alert("Can't get or create modloader hook binary (Game path is null)", "Error")
 		return
 	
-	var hook_path = game_path.path_join(HOOK_BINARY.get_file())
+	var hook_path = game_path.path_join(HOOK_BINARY_PATH.get_file())
 	if FileAccess.file_exists(hook_path):
 		return
 	
@@ -107,7 +107,7 @@ func verify_hook_binary() -> void:
 		OS.alert("Can't create modloader hook binary (%s)" % FileAccess.get_open_error(), "Error")
 		return
 	
-	var hook_buffer = FileAccess.get_file_as_bytes(HOOK_BINARY)
+	var hook_buffer = FileAccess.get_file_as_bytes(HOOK_BINARY_PATH)
 	if hook_buffer.size() <= 0:
 		OS.alert("Can't retrieve modloader hook binary (%s)" % FileAccess.get_open_error(), "Error")
 		return
@@ -252,12 +252,7 @@ func get_afs_folder() -> String:
 
 func get_elf_path() -> String:
 	if game_path == "": return ""
-	return game_path.path_join("SLPM_651.40")
-
-
-func get_modded_elf_path():
-	if game_path == "": return ""
-	return game_path.path_join(MODLOADER_ELF_NAME)
+	return game_path.path_join(ELF_FILENAME)
 
 
 func get_file_crc(path : String) -> int:

@@ -40,14 +40,14 @@ func on_mod_apply_pressed() -> void:
 
 func on_mod_apply_run_pressed() -> void:
 	on_mod_apply_pressed()
-	var elf_path = Global.get_modded_elf_path()
+	var elf_path = Global.get_elf_path()
 	var pcsx2_path = Global.pcsx2_exec_path
 	var pcsx2_args = Global.pcsx2_arguments
 	if pcsx2_path == "" or !FileAccess.file_exists(pcsx2_path):
 		OS.alert("Couldn't find PCSX2. Check if the configured path is correct.")
 		return
 	if !FileAccess.file_exists(elf_path):
-		OS.alert(str("The modloader's game executable (", Global.MODLOADER_ELF_NAME ,") couldn't be found."))
+		OS.alert(str("The game's executable (", Global.ELF_FILENAME ,") couldn't be found."))
 		return
-	pcsx2_args.append(str("-elf ", elf_path))
+	pcsx2_args.append("-elf %s" % elf_path)
 	OS.execute(pcsx2_path, pcsx2_args)
