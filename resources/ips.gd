@@ -185,7 +185,7 @@ func apply_patch(patch: PackedByteArray, source: PackedByteArray) -> void:
 func get_patched_file(patch: PackedByteArray, source_path: String) -> PackedByteArray:
 	var source_bytes: PackedByteArray = FileAccess.get_file_as_bytes(source_path)
 	
-	if source_bytes.size() <= 0:
+	if source_bytes == null or source_bytes.size() <= 0:
 		printerr("IPS: Source file (%s) returned empty. (%s)" % \
 		[source_path.get_file(), str(FileAccess.get_open_error())])
 		return []
