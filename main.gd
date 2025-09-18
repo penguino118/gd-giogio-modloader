@@ -29,7 +29,22 @@ func on_mod_selection(active : bool, row_index : int) -> void:
 
 
 func on_mod_apply_pressed() -> void:
+	if Global.game_path == "":
+		OS.alert("The game path is empty!", "Error")
+		return
+	
+	var elf_path = Global.game_path.path_join(Global.MOD_ELF_FILENAME)
+	var previous_crc = 0
+	var new_crc = 0
+	
 	Global.mod_apply_start.emit()
+	previous_crc = Global.get_file_crc(elf_path)
 	Global.file_handler.apply_mods()
 	Global.save_config()
+	new_crc = Global.get_file_crc(elf_path)
+	if previous_crc != new_crc:
+		OS.alert("The game's executable CRC has changed, this might be\n\
+because one or more mods have applied IPS patches on it.\n\
+You might need to reconfigure the game properties in PCSX2.", "Warning")
+	
 	Global.mod_apply_end.emit()
