@@ -1,8 +1,5 @@
 extends Node
 
-signal mod_apply_start
-signal mod_apply_end
-
 const MOD_FOLDER_NAME = "mods"
 const BACKUPS_FOLDER_NAME = "backups"
 const AFS_FOLDER_NAME = "afs"

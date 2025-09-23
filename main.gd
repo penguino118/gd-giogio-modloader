@@ -37,7 +37,6 @@ func on_mod_apply_pressed() -> void:
 	var previous_crc = 0
 	var new_crc = 0
 	
-	Global.mod_apply_start.emit()
 	previous_crc = Global.get_file_crc(elf_path)
 	Global.file_handler.apply_mods()
 	Global.save_config()
@@ -47,4 +46,4 @@ func on_mod_apply_pressed() -> void:
 because one or more mods have applied IPS patches on it.\n\
 You might need to reconfigure the game properties in PCSX2.", "Warning")
 	
-	Global.mod_apply_end.emit()
+	OS.alert("Applied all mods.", "Information")
