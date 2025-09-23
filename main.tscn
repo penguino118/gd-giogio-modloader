@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0b753ekrvk8t"]
+[gd_scene load_steps=12 format=3 uid="uid://b0b753ekrvk8t"]
 
 [ext_resource type="Script" uid="uid://g44c6cnhybna" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://b8rfon207j3kn" path="res://scenes/mod_setup_gui/mod_list_view.tscn" id="2_1bvp3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://jd8sr0orxoe2" path="res://scenes/mod_creator_ui/mod_creator.tscn" id="5_kek77"]
 [ext_resource type="PackedScene" uid="uid://dhm2e7m2sirmc" path="res://scenes/config_ui/path_picker.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://dwxp6xppbxleu" path="res://scenes/config_ui/game_dir_status_view.gd" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://dvv1mt4olquq1" path="res://scenes/first_time_ui/first_time_ui.tscn" id="9_kek77"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_5vw27"]
 device = -1
@@ -161,3 +162,5 @@ grow_vertical = 2
 size_flags_vertical = 4
 shortcut = SubResource("Shortcut_kek77")
 text = "Save Current Settings"
+
+[node name="FirstTimesUI" parent="." instance=ExtResource("9_kek77")]

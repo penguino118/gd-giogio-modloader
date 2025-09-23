@@ -14,7 +14,9 @@ const RETAIL_CRC = 0x8F82785A
 
 var file_handler = FileHandler.new()
 var mod_list : Array[ModData] = []
+
 # config variables
+var config_status : Error = Error.OK
 var config_path : String = "user://gd-giogio-modloader.cfg"
 var game_path : String = ""
 var pcsx2_cheats_path : String = ""
@@ -346,10 +348,17 @@ func load_config() -> void:
 	print("Loading configuration...")
 	var config = ConfigFile.new()
 	var err = config.load(config_path)
+	
+	config_status = err
+	
+	if err == ERR_FILE_NOT_FOUND:
+		print("Configuration file couldn't be found, modloader probably hasn't been setup yet")
+		return
 
-	if err != OK:
+	if err != OK and err != ERR_FILE_NOT_FOUND:
 		OS.alert("Couldn't load modloader settings! (%s)" % str(err), "Error")
 		return
+	
 
 	pcsx2_cheats_path = config.get_value("General", "pcsx2_cheats_path", "")
 	pcsx2_arguments = config.get_value("General", "pcsx2_arguments", [])

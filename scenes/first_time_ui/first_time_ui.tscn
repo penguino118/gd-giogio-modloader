@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvv1mt4olquq1"]
+
+[ext_resource type="Script" uid="uid://ctkpsmjble7vd" path="res://scenes/first_time_ui/first_time_ui.gd" id="1_6o602"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dmuy8"]
+font_size = 18
+font_color = Color(1, 0.8354441, 0.43896157, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="FirstTimesUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6o602")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.8039216)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "GioGio Mod Loader v0.1
+
+Please make sure to read the included documents to understand how to use this thing.
+
+UI is preliminary.
+
+To set this up, change the game directory in the \"Settings\" tab to a folder with the extracted contents of the game's ISO, and set the PCSX2 Cheats directory to whatever directory the emulator is using.
+
+Press Escape to close this message."
+label_settings = SubResource("LabelSettings_dmuy8")
+horizontal_alignment = 1
+autowrap_mode = 3
