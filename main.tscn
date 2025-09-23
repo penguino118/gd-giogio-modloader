@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0b753ekrvk8t"]
+[gd_scene load_steps=12 format=3 uid="uid://b0b753ekrvk8t"]
 
 [ext_resource type="Script" uid="uid://g44c6cnhybna" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://b8rfon207j3kn" path="res://scenes/mod_setup_gui/mod_list_view.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://jk164yrfsubo" path="res://scenes/mod_setup_gui/mod_description_view.tscn" id="3_lquwl"]
 [ext_resource type="Theme" uid="uid://bxng31jcwi6bd" path="res://resources/main_theme.tres" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://dg70lnriuhgmm" path="res://scenes/config_ui/configure_control.gd" id="5_5vw27"]
+[ext_resource type="PackedScene" uid="uid://jd8sr0orxoe2" path="res://scenes/mod_creator_ui/mod_creator.tscn" id="5_kek77"]
 [ext_resource type="PackedScene" uid="uid://dhm2e7m2sirmc" path="res://scenes/config_ui/path_picker.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://dwxp6xppbxleu" path="res://scenes/config_ui/game_dir_status_view.gd" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://2p0858siofm4" path="res://scenes/applying_mods_overlay.tscn" id="9_kek77"]
@@ -94,9 +95,10 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "Apply"
 
-[node name="Create" type="Control" parent="TabContainer"]
+[node name="Mod Creator" parent="TabContainer" instance=ExtResource("5_kek77")]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
 metadata/_tab_index = 1
 
 [node name="Settings" type="VBoxContainer" parent="TabContainer"]

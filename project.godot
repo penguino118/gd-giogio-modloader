@@ -23,6 +23,7 @@ Global="*res://resources/global.gd"
 
 window/size/viewport_width=512
 window/size/viewport_height=700
+window/subwindows/embed_subwindows=false
 
 [gui]
 

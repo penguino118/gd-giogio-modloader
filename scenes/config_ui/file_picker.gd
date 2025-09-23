@@ -6,6 +6,7 @@ signal file_selected
 @onready var path_line_edit : LineEdit = %PathLineEdit
 @onready var browse_button : Button = %BrowseButton
 @export var target_name : String = "File"
+
 var selected_file : String = "":
 	set(value):
 		selected_file = value
@@ -26,9 +27,9 @@ func set_ui_text() -> void:
 func on_browse_pressed() -> void:
 	var file_dialog = FileDialog.new()
 	# init
-	file_dialog.set_file_mode(file_dialog.FILE_MODE_OPEN_FILE)
 	file_dialog.set_access(FileDialog.ACCESS_FILESYSTEM)
-	file_dialog.title = str("Select ", target_name, " File")
+	file_dialog.set_file_mode(file_dialog.FILE_MODE_OPEN_FILE)
+	file_dialog.title = str("Select %s" % target_name)
 	file_dialog.ok_button_text = "Open"
 	file_dialog.use_native_dialog = true
 	# set signals

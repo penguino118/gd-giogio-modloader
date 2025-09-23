@@ -52,7 +52,7 @@ func encode_u24_be(packed_array: PackedByteArray, value: int, offset: int) -> vo
 
 
 func encode_magic(packed_array: PackedByteArray) -> void:
-	var encoded_magic = MAGIC.to_utf8_buffer().hex_encode()
+	var encoded_magic = MAGIC.to_utf8_buffer()
 	packed_array.append_array(encoded_magic)
 
 
@@ -79,7 +79,7 @@ func collect_diff_records(source_bytes: PackedByteArray, target_bytes: PackedByt
 	var offset := 0
 	var records := [{}]
 	var previous_record = records[0]
-	while offset < target_bytes.size():
+	while offset < target_bytes.size() && offset < source_bytes.size():
 		var source = source_bytes.decode_u8(offset)
 		var target = target_bytes.decode_u8(offset)
 		

@@ -1,6 +1,6 @@
 class_name FileHandler
 
-var IPS_Parser = IPSParser.new()
+var ips_parser = IPSParser.new()
 
 var backup_entries = []
 # structure:
@@ -108,7 +108,7 @@ func patch_file(source_file_path, patch_data, mod_filename) -> void:
 		printerr("Source path is empty, skipping patching.")
 		return
 	
-	var patched_file = IPS_Parser.get_patched_file(patch_data, source_file_path)
+	var patched_file = ips_parser.get_patched_file(patch_data, source_file_path)
 	var file = FileAccess.open(source_file_path, FileAccess.WRITE)
 	if file == null:
 		printerr("Source file (%s) couldn't be opened for patching. (%s)" % \
