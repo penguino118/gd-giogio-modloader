@@ -54,7 +54,7 @@ All IRX modules and their folder should remain in uppercase.
 If it's something else, please enable EE and IOP console logging and turn on the Log Window in PCSX2, then restart the game and report what it says.
 
 ### Game starts, but no mods seem to have been applied
-Make sure that the host fileloading cheat is enabled, since otherwise it'll load files from the .ISO set under `Disc Path` in the game settings.
+Make sure that the host fileloading cheat is enabled, since otherwise it'll load files from the .ISO set under `Disc Path` in the game settings. You can confirm this by turning on EE and IOP console logging and then checking the console log as the game runs. If the modloader is properly activated, it should be printing when it does or doesn't find local mod files to load.
 
 
 ### Mod Loader says the CRC changed?
