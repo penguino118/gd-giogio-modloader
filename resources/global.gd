@@ -60,7 +60,7 @@ func check_and_add_pnach_header(pnach: String, mod_title: String, index: int) ->
 	
 	if has_title: return pnach
 	
-	var placeholder_title = "[Modloader\\Unlabeled Patches\\%s (%s)]" % [mod_title, index]
+	var placeholder_title = "[Mod Loader\\Unlabeled Patches\\%s (%s)]" % [mod_title, index]
 	pnach_lines.insert(0, placeholder_title)
 	return '\n'.join(pnach_lines)
 	
@@ -81,10 +81,11 @@ func check_and_add_pnach_header(pnach: String, mod_title: String, index: int) ->
 
 
 func get_pnach_filename() -> String:
+	var crc = get_file_crc(get_modded_elf_path())
 	var elf_basename = ELF_FILENAME
 	elf_basename = elf_basename.replace('.', '')
 	elf_basename = elf_basename.replace('_', '-')
-	return "%s_%8X.modloader.pnach" % [elf_basename, RETAIL_CRC]
+	return "%s_%8X.modloader.pnach" % [elf_basename, crc]
 
 
 func insert_hook_pnach(pnach_lines: PackedStringArray) -> void:
