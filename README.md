@@ -64,9 +64,13 @@ The "CRC" is a check PCSX2 makes to distinguish between the different regions an
 
 
 ### something else happened 😂😂😂
-If there's an error with the mod loader program, please report what's happening to me so I can fix it, and please include the console log with it.
-If you're on windows, run the console enabled .exe, and if you're on Linux just run it from the terminal.
-Note that it will print out filepaths which could reveal your username depending on how you set up your directories, feel free to erase those names from the logs if you include them.
+If there's an error with the mod loader, please report what's happening to me so I can fix it, and please include the console log with it.
+
+On linux, the latest logs should be here: `/.local/share/godot/app_userdata/GioGio Modloader`
+
+For Windows the path is:  `%APPDATA%\Godot\app_userdata\GioGio Modloader`
+
+Note that the program will print out filepaths which could reveal your username depending on how you set up your directories, feel free to erase your username from the logs since it's (probably) unimportant.
 
 ## Misc notes
 - Currently, files are removed using the `OS.send_to_trash` function, meaning they aren't completely deleted, maybe it should be switched to permanent deletion once everything is confirmed to be working fine.
