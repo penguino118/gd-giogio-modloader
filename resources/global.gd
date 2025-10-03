@@ -83,7 +83,7 @@ func check_and_add_pnach_header(pnach: String, mod_title: String, index: int) ->
 func get_pnach_filename() -> String:
 	var elf_basename = ELF_FILENAME
 	elf_basename = elf_basename.replace('.', '')
-	elf_basename = elf_basename.replace('-', '_')
+	elf_basename = elf_basename.replace('_', '-')
 	return "%s_%8X.modloader.pnach" % [elf_basename, RETAIL_CRC]
 
 
