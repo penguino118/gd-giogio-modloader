@@ -66,7 +66,6 @@ func fill_data_from_filelist(zip_reader : ZIPReader, file_list : PackedStringArr
 		var metadata : PackedByteArray = zip_reader.read_file(path) 
 		
 		if path.get_file() == "meta.json": 
-			var metajson : PackedByteArray = zip_reader.read_file(path) 
 			var json_string
 			var parsed_json
 			

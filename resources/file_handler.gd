@@ -103,7 +103,7 @@ func backup_file(source_file: String, mod_filename: String) -> bool:
 #endregion
 
 
-func patch_file(source_file_path, patch_data, mod_filename) -> void:
+func patch_file(source_file_path, patch_data) -> void:
 	if source_file_path == "": 
 		printerr("Source path is empty, skipping patching.")
 		return
@@ -254,7 +254,7 @@ func patch_all_files(patch_files: Array[Dictionary]) -> void:
 			if not backup_success:
 				continue
 		
-		patch_file(source_file_path, patch_data, mod_filename)
+		patch_file(source_file_path, patch_data)
 
 
 func apply_mods() -> void:
