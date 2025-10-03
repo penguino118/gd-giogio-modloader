@@ -45,8 +45,9 @@ func update_status_view(elf_exists : bool) -> void:
 
 
 func on_settings_changed(target : String, value : String) -> void:
-	if value.length() <= 0:
-		printerr("Path setting (%s) shouldn't be empty..." % target)
+	var original := Global.game_path if target == "Game Directory" else Global.pcsx2_cheats_path
+	if value != original and value.length() <= 0:
+		printerr("\"%s\" shouldn't be empty..." % target)
 		return
 	
 	match(target):

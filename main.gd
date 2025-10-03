@@ -22,6 +22,7 @@ func set_mod_list() -> void:
 	mod_list_view.set_list()
 	mod_description_view.set_default_description()
 	mod_description_view.set_default_preview()
+	mod_apply_button.disabled = false if Global.mod_list.size() > 0 else true
 
 
 func on_mod_selection(active : bool, row_index : int) -> void:
@@ -36,11 +37,11 @@ func on_mod_apply_pressed() -> void:
 		OS.alert("The game path is empty!", "Error")
 		return
 	
-	var elf_path = FileAccess.file_exists(Global.get_modded_elf_path())
-	if not FileAccess.file_exists(elf_path):
+	if not FileAccess.file_exists(Global.get_modded_elf_path()):
 		OS.alert("The game's executable couldn't be found!", "Error")
 		return
 	
+	var elf_path = Global.get_modded_elf_path()
 	var previous_crc = 0
 	var new_crc = 0
 	

@@ -263,7 +263,7 @@ func get_modded_elf_path() -> String:
 
 func verify_modloader_elf_exists() -> void:
 	if game_path == "":
-		OS.alert("Can't get or create modloader ELF (Game path is null)", "Error")
+		printerr("Can't get or create modloader ELF (Game path is null)")
 		return
 	
 	var original_elf_path = Global.game_path.path_join(Global.ELF_FILENAME)

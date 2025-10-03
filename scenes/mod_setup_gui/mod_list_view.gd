@@ -35,7 +35,7 @@ func set_list() -> void:
 	# load mod data
 	if Global.mod_list.size() > 0:
 		var mod_count = Global.mod_list.size()
-		
+		print("Global.mod_list has %s entries." % mod_count)
 		for i in range(mod_count):
 			var mod = Global.mod_list[i]
 			var info_row = mod_info_row.instantiate()
@@ -47,7 +47,7 @@ func set_list() -> void:
 			info_row.selected.connect(on_mod_selected)
 			info_row.unselected.connect(on_mod_unselected)
 	else:
-		printerr("Global.mod_list has no entries.")
+		print("Global.mod_list has no entries.")
 
 
 func get_selected_row_index() -> int:
