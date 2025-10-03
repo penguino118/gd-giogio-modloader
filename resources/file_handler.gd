@@ -232,7 +232,7 @@ func patch_all_files(patch_files: Array[Dictionary]) -> void:
 		var source_file_path = Global.game_path.path_join(patch_target)
 		var backup_exists := false
 		
-		if patch_target == Global.ELF_FILENAME:
+		if patch_target == Global.ELF_FILENAME or patch_target.ends_with(Global.ELF_FILENAME):
 			# we're gonna patch the modded elf for the game list instead of the main executable
 			source_file_path = Global.game_path.path_join(Global.MOD_ELF_FILENAME)
 			backup_exists = true # since the original elf is kept
