@@ -32,7 +32,7 @@ func update_status_view(elf_exists : bool) -> void:
 		[string_color, Global.get_elf_path().get_file()])
 		
 		if crc != Global.RETAIL_CRC:
-			string_color = "#eff760" # yellow; crc mismatch
+			string_color = "#eff760" # yellow; retail crc mismatch
 		
 		game_dir_status_view.append_text("[color=%s][outline_size=4]\
 		Executable CRC: %8X [/outline_size][/color]" % [string_color, crc])
@@ -42,16 +42,19 @@ func update_status_view(elf_exists : bool) -> void:
 		"[color=%s][outline_size=4]\
 		Game executable not found.\
 		[/outline_size][/color]" % string_color)
-		
 
 
 func on_settings_changed(target : String, value : String) -> void:
+	if value.length() <= 0:
+		printerr("Path setting (%s) shouldn't be empty..." % target)
+		return
+	
 	match(target):
 		"Game Directory":
 			Global.game_path = value
-			print(Global.get_elf_path())
 			var elf_exists = FileAccess.file_exists(Global.get_elf_path())
 			update_status_view(elf_exists)
+			Global.verify_modloader_elf_exists()
 		"PCSX2 Cheats":
 			Global.pcsx2_cheats_path = value
 		_:

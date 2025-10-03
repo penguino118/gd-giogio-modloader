@@ -36,7 +36,11 @@ func on_mod_apply_pressed() -> void:
 		OS.alert("The game path is empty!", "Error")
 		return
 	
-	var elf_path = Global.game_path.path_join(Global.MOD_ELF_FILENAME)
+	var elf_path = FileAccess.file_exists(Global.get_modded_elf_path())
+	if not FileAccess.file_exists(elf_path):
+		OS.alert("The game's executable couldn't be found!", "Error")
+		return
+	
 	var previous_crc = 0
 	var new_crc = 0
 	
