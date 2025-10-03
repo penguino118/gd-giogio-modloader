@@ -46,13 +46,10 @@ custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 text = "GioGio Mod Loader v0.1
 
-Please make sure to read the included documents to understand how to use this thing.
+Please read the documentation first!
+All UI is preliminary.
 
-UI is preliminary.
-
-To set this up, change the game directory in the \"Settings\" tab to a folder with the extracted contents of the game's ISO, and set the PCSX2 Cheats directory to whatever directory the emulator is using.
-
-Press Escape to close this message."
+(Press Escape to close this message)"
 label_settings = SubResource("LabelSettings_dmuy8")
 horizontal_alignment = 1
 autowrap_mode = 3
