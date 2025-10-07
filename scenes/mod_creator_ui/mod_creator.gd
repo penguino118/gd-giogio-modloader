@@ -107,7 +107,7 @@ func clear_current_mod() -> void:
 
 
 func on_save_pressed() -> void:
-	var save_filters : PackedStringArray = [".zip;ZIP Archive;application/zip-compressed"]
+	var save_filters : PackedStringArray = ["*.zip;ZIP Archive;application/zip-compressed"]
 	var save_dialog = get_file_save_dialog("Save Mod Archive", save_filters)
 	save_dialog.file_selected.connect(on_file_save)
 	save_dialog.popup()
