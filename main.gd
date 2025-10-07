@@ -1,8 +1,9 @@
 extends Node
 
+@onready var mod_setup: VBoxContainer = $"TabContainer/Mod Setup"
 @onready var mod_list_view = %"Mod List View"
 @onready var mod_description_view = %"Mod Description View"
-@onready var mod_apply_button: Button = $"TabContainer/Mod Setup/FooterPanel/HBoxContainer/ApplyButton"
+@onready var mod_apply_button: Button = %ApplyModsButton
 @onready var first_time_ui = $FirstTimesUI
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +19,7 @@ func _ready() -> void:
 
 
 func set_mod_list() -> void:
+	if not mod_setup.visible: return
 	Global.init_mod_list()
 	mod_list_view.set_list()
 	mod_description_view.set_default_description()
