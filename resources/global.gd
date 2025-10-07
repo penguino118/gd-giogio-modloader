@@ -40,44 +40,21 @@ func check_and_add_pnach_header(pnach: String, mod_title: String, index: int) ->
 	if pnach.length() == 0: return pnach
 	
 	var pnach_lines = pnach.split('\n')
-	var has_title = false
 	
-	for line in pnach_lines:
-		# first few lines might be titles, might be patches, might be comments
-		# we need to add a title if it doesn't exist by the start of the patch
-		# incase there's randomly a title in the middle of the patch, this
-		# should break before that, and only add a title to the unlabelled start
-		# it shouldn't add a title if it already exists at the start of the patch
-		# FIXME: this probably breaks if patch lines are commented using /* these */
-		if line.begins_with("//") or line.begins_with("/*") or line.begins_with("*/")\
-			or line.begins_with("gsinterlacemode") or line.begins_with("gsaspectratio"): continue 
-		if line.begins_with("author") or line.begins_with("description") or line.begins_with("patch="):
-			has_title = false
-			break
+	for i in range(pnach_lines.size()):
+		var line = pnach_lines[i].strip_edges()
+		if line == "" or line.begins_with("//"):
+			continue
 		if line.begins_with("[") and line.ends_with("]"):
-			has_title = true
-			break
+			return pnach
+		if line.begins_with("author=") or line.begins_with("description=")\
+		or line.begins_with("patch=") or line.begins_with("gsinterlace=")\
+		or line.begins_with("gsaspectratio="):
+			var header = "[%s #%s]" % [mod_title, index+1]
+			pnach_lines.insert(i, header)
+			return "\n".join(pnach_lines)
 	
-	if has_title: return pnach
-	
-	var placeholder_title = "[Mod Loader\\Unlabeled Patches\\%s (%s)]" % [mod_title, index]
-	pnach_lines.insert(0, placeholder_title)
-	return '\n'.join(pnach_lines)
-	
-	# alt take that adds modloader header to existing pnachs
-	#var pnach_lines = pnach.split('\n')
-	#var first_line = pnach_lines[0]
-	#if first_line.begins_with("[") and first_line.ends_with("]"): 
-		#if first_line.begins_with("[Modloader\\Mods\\"): 
-			#return pnach
-		#else: # append modloader header to title
-			#first_line.insert(1, "[Modloader\\Mods\\")
-			#pnach_lines.set(0, first_line)
-			#return pnach_lines.join('\n')
-	#else: # create placeholder title
-		#var new_title = "[Modloader\\Mods\\Unlabeled Pnach (%s)]\n" % mod_title
-		#pnach_lines.insert(0, new_title)
-		#return pnach_lines.join('\n')
+	return pnach
 
 
 func get_pnach_filename() -> String:
